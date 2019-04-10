@@ -39,11 +39,12 @@ public class LinkedList {
 			Node last = this.headNode;
 //			else we go to the last but one and set the last.next to our new node
 			while (last.before != null) {
+				last.next = last;
 				last = last.before;
 			}
 			// usingNode is now headnode
 			last.before = usingNode;
-			usingNode.next = this.headNode;
+			usingNode.next = last;
 			this.headNode = usingNode;
 		}
 
@@ -70,12 +71,17 @@ public class LinkedList {
 
 				removed = last;
 				if (remove == true) {
-					if (last.next == null) {
-						last.before.next = null;
-						last = null;
+					if (Node.counter == 1) { // or Node.counter == 1
+//						last.before.next = null;
+						this.headNode = null;
 						Node.counter--;
 					} else if (last.before == null) {
 						this.headNode = last.next;
+						this.headNode.before = null;
+						last = null;
+						Node.counter--;
+					} else if (last.next == null && last.before != null) {
+						last.before.next = null;
 						last = null;
 						Node.counter--;
 					} else {
