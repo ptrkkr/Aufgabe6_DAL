@@ -19,13 +19,13 @@ public class MyHashTable {
 	// TODO: Add an array that contains elements of your data structure needed for
 	// chaining
 	LinkedList[] listArr;
-	
+
 	/**
 	 *
 	 * @param hash_table_size fixed size of the hash table
 	 */
 	public MyHashTable(int hash_table_size) {
-		
+
 		this.listArr = new LinkedList[hash_table_size];
 	}
 
@@ -48,7 +48,7 @@ public class MyHashTable {
 	 */
 	public String get(int key) {
 		// TODO
-		return null;
+		return this.listArr[hash(key)].removeNode(key, false).getValue();
 	}
 
 	/**
@@ -58,7 +58,11 @@ public class MyHashTable {
 	 * @param key the key that needs to be removed
 	 */
 	public void remove(int key) {
-		// TODO
+		try {
+			this.listArr[hash(key)].removeNode(key, true);
+		} catch (NullPointerException e) {
+
+		}
 	}
 
 	/**
@@ -69,7 +73,15 @@ public class MyHashTable {
 	 */
 	public boolean contains(int key) {
 		// TODO
-		return false;
+		try {
+			if(key == this.listArr[hash(key)].removeNode(key, false).getKey());
+			return true;
+//			else 
+//				return false;
+		}catch(NullPointerException e) {
+			
+			return false;
+		}
 	}
 
 	/**
@@ -79,8 +91,8 @@ public class MyHashTable {
 	 * @return a hash code value for this key
 	 */
 	private int hash(int key) {
-		// TODO
-		return 0;
+
+		return (int) Math.floor(hash_table_size * ((key * golden_ratio) % 1));
 	}
 
 	/**
