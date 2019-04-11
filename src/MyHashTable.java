@@ -26,7 +26,14 @@ public class MyHashTable {
 	 */
 	public MyHashTable(int hash_table_size) {
 
-		this.listArr = new LinkedList[hash_table_size];
+		this.hash_table_size = hash_table_size;
+		this.listArr = new LinkedList[this.hash_table_size];
+		
+//		TODO is there an other Solution?
+		for (int i = 0; i < this.hash_table_size; i++) {
+			this.listArr[i] = new LinkedList();
+		}
+		
 	}
 
 	/**
@@ -36,7 +43,8 @@ public class MyHashTable {
 	 * @param value the value
 	 */
 	public void put(int key, String value) {
-		this.listArr[hash(key)].addNode(key, value);
+		int has = hash(key);
+		this.listArr[has].addNode(key, value);
 	}
 
 	/**
@@ -74,12 +82,12 @@ public class MyHashTable {
 	public boolean contains(int key) {
 		// TODO
 		try {
-			if(key == this.listArr[hash(key)].removeNode(key, false).getKey());
+			if (key == this.listArr[hash(key)].removeNode(key, false).getKey())
 			return true;
-//			else 
-//				return false;
-		}catch(NullPointerException e) {
-			
+			else 
+				return false;
+		} catch (NullPointerException e) {
+
 			return false;
 		}
 	}
@@ -92,7 +100,7 @@ public class MyHashTable {
 	 */
 	private int hash(int key) {
 
-		return (int) Math.floor(hash_table_size * ((key * golden_ratio) % 1));
+		return (int) Math.floor(this.listArr.length * ((key * golden_ratio) % 1));
 	}
 
 	/**
@@ -105,7 +113,9 @@ public class MyHashTable {
 	@Override
 	public String toString() {
 		String result = "";
-		// TODO
+		for (int i = 0; i < this.listArr.length; i++) {
+			result += "[" + i + "]" + this.listArr[i].toString() + "\n";
+		}
 		return result;
 	}
 }

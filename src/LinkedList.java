@@ -49,15 +49,17 @@ public class LinkedList {
 		}
 
 	}
+//	{12,ABC}{4,abc}
+	public String toString() {
 
-	public void printList() {
-
+		String result = "";
 		Node usingNode = this.headNode;
 
 		while (usingNode != null) {
-			System.out.println(usingNode.getKey() + " " + usingNode.getValue());
+			result += "{" + usingNode.getKey() + "," + usingNode.getValue() + "}";
 			usingNode = usingNode.next;
 		}
+		return result;
 
 	}
 

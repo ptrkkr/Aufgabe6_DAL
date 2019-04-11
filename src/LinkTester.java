@@ -11,7 +11,7 @@ public class LinkTester {
 		l1.addNode(6, "third");
 		l1.addNode(7, "fourth");
 
-		l1.printList();
+		System.out.println(l1.toString());
 //		try this again
 		System.out.println("removed: " + l1.removeNode(5, true).getKey());
 		System.out.println("removed: " + l1.removeNode(1, true).getKey());
@@ -25,15 +25,15 @@ public class LinkTester {
 //		}
 
 		System.out.println("-".repeat(4));
-		l1.printList();
+		System.out.println(l1.toString());
 
 		System.out.println(contains(7, l1));
 
-//		int key = 5;
-//		int hash_table_size = 8;
-//		double golden_ratio = 0.6180339887;
-//
-//		System.out.println((int) Math.floor(hash_table_size * ((key * golden_ratio) % 1)));
+		int key = 1;
+		int hash_table_size = 6;
+		double golden_ratio = 0.6180339887;
+
+		System.out.println((int) Math.floor(hash_table_size * ((key * golden_ratio) % 1)));
 
 	}
 
