@@ -1,6 +1,0 @@
-6
-put(1,Abc)
-get(1)
-contains(1)
-remove(1)
-contains(1)

@@ -43,8 +43,13 @@ public class MyHashTable {
 	 * @param value the value
 	 */
 	public void put(int key, String value) {
-		int has = hash(key);
-		this.listArr[has].addNode(key, value);
+		
+		if(this.contains(key)) {
+			this.remove(key);
+			this.listArr[hash(key)].addNode(key, value);
+		}else {
+			this.listArr[hash(key)].addNode(key, value);
+		}
 	}
 
 	/**
@@ -56,7 +61,11 @@ public class MyHashTable {
 	 */
 	public String get(int key) {
 		// TODO
+		try {
 		return this.listArr[hash(key)].removeNode(key, false).getValue();
+		}catch (NullPointerException e) {
+			return null;
+		}
 	}
 
 	/**
@@ -114,7 +123,7 @@ public class MyHashTable {
 	public String toString() {
 		String result = "";
 		for (int i = 0; i < this.listArr.length; i++) {
-			result += "[" + i + "]" + this.listArr[i].toString() + "\n";
+			result += "[" + i + "]:" + this.listArr[i].toString() + "\n";
 		}
 		return result;
 	}
