@@ -25,7 +25,23 @@ public class LinkedList {
 		int getKey() {
 			return this.key;
 		}
+		
+		void setValue(String value) {
+			this.value = value;
+		}
 
+	}
+	
+	public void checkAndAdd(int key, String value) {
+		if(Node.counter == 0) {
+			addNode(key,value);
+		}else {
+			try {
+					removeNode(key,false).setValue(value);
+			}catch(NullPointerException e) {
+				addNode(key,value);
+			}
+		}
 	}
 
 	public void addNode(int key, String value) {

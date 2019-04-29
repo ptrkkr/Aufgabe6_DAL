@@ -28,12 +28,12 @@ public class MyHashTable {
 
 		this.hash_table_size = hash_table_size;
 		this.listArr = new LinkedList[this.hash_table_size];
-		
+
 //		TODO is there an other Solution?
 		for (int i = 0; i < this.hash_table_size; i++) {
 			this.listArr[i] = new LinkedList();
 		}
-		
+
 	}
 
 	/**
@@ -43,13 +43,8 @@ public class MyHashTable {
 	 * @param value the value
 	 */
 	public void put(int key, String value) {
-		
-		if(this.contains(key)) {
-			this.remove(key);
-			this.listArr[hash(key)].addNode(key, value);
-		}else {
-			this.listArr[hash(key)].addNode(key, value);
-		}
+
+		this.listArr[hash(key)].checkAndAdd(key, value);
 	}
 
 	/**
@@ -62,8 +57,8 @@ public class MyHashTable {
 	public String get(int key) {
 		// TODO
 		try {
-		return this.listArr[hash(key)].removeNode(key, false).getValue();
-		}catch (NullPointerException e) {
+			return this.listArr[hash(key)].removeNode(key, false).getValue();
+		} catch (NullPointerException e) {
 			return null;
 		}
 	}
@@ -92,8 +87,8 @@ public class MyHashTable {
 		// TODO
 		try {
 			if (key == this.listArr[hash(key)].removeNode(key, false).getKey())
-			return true;
-			else 
+				return true;
+			else
 				return false;
 		} catch (NullPointerException e) {
 
